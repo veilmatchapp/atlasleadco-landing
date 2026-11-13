@@ -1,8 +1,8 @@
 # Palette B: deep ink
 
-Intent: a cooler, steadier ground for a business that now sells security. A very dark blue-slate, the logo's gold as the single warm accent, warm ivory text, and muted steel and teal as real secondary tones.
+Status: chosen by the owner on 2026-11-13. This is the site palette.
 
-Switch to it with `?theme=b`.
+Intent: a cooler, steadier ground for a business that now sells security. A very dark blue-slate, the logo's gold as the single warm accent, warm ivory text, and muted steel and teal as real secondary tones.
 
 ## Tokens
 | Token | Hex | Role |

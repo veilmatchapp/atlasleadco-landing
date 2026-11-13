@@ -3,17 +3,8 @@
 @font-face{font-family:"UI";src:url(fonts/inter-400.woff2) format("woff2");font-weight:400;font-display:swap}
 @font-face{font-family:"UI";src:url(fonts/inter-600.woff2) format("woff2");font-weight:600;font-display:swap}
 
-:root,[data-theme="a"]{
-  /* A: refined walnut. Gold only for the logo, the button and key highlights. */
-  --ground:#241711; --ground2:#3A261C; --text:#F2EADB; --text2:#D8CEBC; --text3:#B7AB98;
-  --gold:#C7A348; --gold-hi:#EBCB7C; --secondary:#7FB3AA; --river:#7FB3AA;
-  --paper:#F4F2EF; --ink:#2A1C14; --ink2:#4A3C32; --mute:#65574B; --accent-dark:#2A6760; --btn-ink:#241711; --btn-ink-text:#F2EADB;
-  --shadow:rgba(36,23,17,.95); --line-soft:rgba(242,234,219,.12);
-  --map-road:rgba(242,234,219,.42); --map-base:rgba(58,38,28,.6); --map-dot:rgba(127,179,170,.6); --town-dim:#7a5f3b;
-  /* read by the 3D code */
-  --gl-body:#2a1910; --gl-key:#ffd9a0; --gl-rim:#d9a066; --gl-bloom:255,196,110; --gl-glow:0.9,0.68,0.36; --gl-grat:#E9E0CF; --gl-coast:#E4DAC6; --gl-lake:#EBCB7C;
-}
-[data-theme="b"]{
+:root{
+  /* Palette B, deep ink (chosen by the owner 2026-11-13). Tokens and contrast: tasks/palette-B-deep-ink.md */
   /* B: deep ink. Dark blue-slate ground, the logo's gold as the single warm accent, steel and teal as real secondary tones. */
   --ground:#101C2B; --ground2:#1B2B40; --text:#F3EBDD; --text2:#D5DAE1; --text3:#A9B6C5;
   --gold:#C7A348; --gold-hi:#E6CB86; --secondary:#8FB4CC; --river:#5BA8AE;
@@ -21,8 +12,7 @@
   --shadow:rgba(16,28,43,.95); --line-soft:rgba(243,235,221,.12);
   --map-road:rgba(143,180,204,.55); --map-base:rgba(27,43,64,.7); --map-dot:rgba(143,180,204,.5); --town-dim:#6f7f8f;
   --gl-body:#15263d; --gl-key:#cfe0f5; --gl-rim:#7fa8d6; --gl-bloom:96,140,176; --gl-glow:0.45,0.65,0.85; --gl-grat:#9FB6CC; --gl-coast:#B9CCDC; --gl-lake:#E9F1F8;
-}
-:root{
+
   --ui-paper:#F6F5F2; --ui-ink:#1F2328; --ui-mute:#6A6F76; --ui-line:#E3E1DC; --ui-accent:#3563C9;
   --gx:clamp(20px,5vw,72px);
 }
@@ -153,7 +143,6 @@ h1{margin:0 0 clamp(14px,2.4vh,26px);font-weight:400;font-size:clamp(3.1rem,7.3v
 .btn--ink:hover{background:var(--ink2)}
 .btn2{color:var(--ink);font-weight:600;text-underline-offset:5px}
 .paper-cta .note{flex-basis:100%;margin:.2em 0 0;max-width:40em;color:var(--ink2);font-size:.95rem}
-html[data-theme="a"] .still-b,html[data-theme="b"] .still-a{display:none!important}
 
 /* desktop: the stage 4 text stays in the column left of the laptop so it never sits on the light screen */
 @media (min-width:821px){

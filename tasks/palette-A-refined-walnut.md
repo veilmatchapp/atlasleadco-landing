@@ -1,8 +1,8 @@
 # Palette A: refined walnut
 
-Intent: keep the warm, local feel and the logo's gold, but spend gold only where it means something. Gold is the logo, the one button and the key highlights (the two town markers and the Great Lakes line at the Michigan stage). Everything else is ivory, walnut and patina.
+Status: not chosen. The owner picked palette B on 2026-11-13. Kept as a record.
 
-Switch to it with `?theme=a` (it is the default).
+Intent: keep the warm, local feel and the logo's gold, but spend gold only where it means something. Gold is the logo, the one button and the key highlights (the two town markers and the Great Lakes line at the Michigan stage). Everything else is ivory, walnut and patina.
 
 ## Tokens
 | Token | Hex | Role |

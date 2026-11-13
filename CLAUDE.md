@@ -43,7 +43,7 @@ Stay protected (page `/security`)
 - Email protection: filtering plus SPF, DKIM and DMARC set up properly. Available now.
 - Security awareness training: phishing simulations plus short quarterly training. Available now.
 - Monthly security lead: quarterly reviews, insurance renewal answers, a written report for the owner of the office. Available now.
-- Firewall and network setup: project-based setup and hardening. **Label undecided: ask the owner.** Don't show it as Available now until he says so.
+- Firewall and network setup: project-based setup and hardening. Join the waitlist (owner confirmed 2026-11-13: not available yet).
 - Endpoint protection with 24/7 monitoring: proven engines plus a partner security operations center. Join the waitlist.
 - Compliance programs: IRS WISP, FTC Safeguards Rule programs, CMMC readiness for defense suppliers. Join the waitlist.
 - IT help desk: managed support for small offices. Join the waitlist.
@@ -106,7 +106,7 @@ Read the reference board first: https://claude.ai/artifact/LeyhAkSYBD5w3W522FE1z
 
 ## Signature moment (the one big idea)
 Reference technique: jeskojets.com (scroll carries you through one object). Material reference: harkcap.com. Office-UI reference: endex.ai.
-1. Open: warm deep-dark page (palette under test, see Color); a **3D globe** on a dark lacquer body with a subtle rim light (Three.js, physical material, environment light), turning slowly. The globe is drawn as a **very faint latitude and longitude grid** (about every 15°, line opacity about 0.08 to 0.15, reading as fine engraving, not a cage) plus **thin, faint coastlines** from real data at a low level of detail. No dot continents. Large headline low-left; primary button "Get a free Atlas Checkup", secondary "Book a call".
+1. Open: deep-ink page (see Color); a **3D globe** on a dark lacquer body with a subtle rim light (Three.js, physical material, environment light), turning slowly. The globe is drawn as a **very faint latitude and longitude grid** (about every 15°, line opacity about 0.08 to 0.15, reading as fine engraving, not a cage) plus **thin, faint coastlines** from real data at a low level of detail. No dot continents. Large headline low-left; primary button "Get a free Atlas Checkup", secondary "Book a call".
 2. Scroll in (GSAP ScrollTrigger, pinned, scrubbed): the globe turns to Michigan; the camera pushes in; the **Great Lakes coastline line brightens and thickens**, then hands off to the county map.
 3. Land on Washtenaw County (Census boundary data as SVG); Ann Arbor and Saline light up.
 4. The map gives way to a laptop screen: a recreated email and assistant window typing out a renewal letter and a follow-up email. Label it as an illustration. Don't use real Microsoft screenshots or logos without checking their trademark rules. Consider one equally honest illustration for security (for example a recreated sign-in policy screen being tightened, labeled as an illustration).
@@ -115,7 +115,7 @@ Hero copy must introduce all three pillars, not only AI. Credit the coastline da
 Smooth scroll: Lenis (respects reduced motion). Reduced motion: four still frames. No WebGL: a pre-rendered image. The headline must stay the LCP element; load the 3D right after it.
 
 ## Color
-Two palettes are under test: **A, refined walnut** (gold only for the logo, the button and key highlights) and **B, deep ink** (dark blue-slate ground, the logo's gold as the single warm accent, real secondary tones). Token plans are in `tasks/palette-A-refined-walnut.md` and `tasks/palette-B-deep-ink.md`. The owner picks; until then both live behind a theme switch. Business sections below the hero use light paper grounds. Every text pair must reach 4.5:1 contrast, and the logo must be checked on the chosen ground.
+The owner chose **palette B, deep ink** on 2026-11-13. Tokens and contrast are in `tasks/palette-B-deep-ink.md`: ground #101C2B, panels #1B2B40, warm ivory text #F3EBDD, the logo's gold #C7A348 as the single warm accent (logo, primary button, town markers), steel #8FB4CC and teal #5BA8AE as the secondary tones, light cool paper #F1F4F7 with ink #14202E for the business sections below the hero. Palette A is not used. Guard against the banned near-black-plus-gold look: keep the steel and teal tones, the slate panels and the paper sections, and keep gold rare. B is also close to the rejected old site's navy and gold, so the engraved-line globe and the paper sections are what keep it distinct. Every text pair must reach 4.5:1 contrast. Over a paper section the header takes the ink ground so the logo's white lettering stays visible.
 
 ## Process (required)
 1. Load the frontend-design skill before any design work.
