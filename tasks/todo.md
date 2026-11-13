@@ -1,18 +1,15 @@
 # Atlas build: current state
 
-## Process steps 2 to 5 (hero directions)
-- [x] Open atlas-logo.png (gold figure and globe, white lettering, needs a dark ground)
-- [x] Token plan for three directions, reviewed against the banned list (tasks/hero-plan.md)
-- [x] Build A work order, B gantry, C globe in prototypes/
-- [x] Screenshot each at 390px and 1440px (prototypes/screens/)
-- [x] Critique screenshots, fix, remove one accessory from each
-- [ ] Owner picks one direction
+## Signature moment, stages 1 to 4 (hero/)
+- [x] Read CLAUDE.md and the reference board
+- [x] Context7 used for three.js, GSAP and Lenis APIs (queried over stdio, the MCP tools were not loaded in the session)
+- [x] Token plan reviewed against the banned list (tasks/hero-sequence-plan.md)
+- [x] Build: gold 3D globe, dive to Michigan, Census county map, laptop screen with typed emails
+- [x] Screenshots at 390 and 1440, critique, fixes
+- [x] Scroll video at 1440 (hero/video/scroll-1440.webm)
+- [ ] Owner approves the hero
 
-## Not started, waiting on the pick
-- Pages: /ai-implementation, /ai-receptionist, /websites, /how-it-works, /about, /contact, /privacy
-- Verification per CLAUDE.md step 7 (performance trace, axe, keyboard, reduced motion, contrast)
-- Hosting plan check (Vercel Hobby is non-commercial), apex to www redirect, Web3Forms form
-
-## Review
-Prototypes are static HTML with no frameworks. Only C needs a build step (node build/build-c.mjs).
-Old index.html is untouched.
+## Not started, waiting on approval
+- Calm sections (services, 4-step process, about, contact) and the other pages
+- Step 7 verification per CLAUDE.md (performance trace, axe, keyboard, contrast)
+- Hosting plan, apex redirect, Web3Forms form
