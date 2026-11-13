@@ -2,3 +2,7 @@ node_modules/
 .playwright-mcp/
 tasks/SITE_SCOPE_*.md
 site/prices.local.json
+.vercel
+
+.vercel
+.env*

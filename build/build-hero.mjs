@@ -2,6 +2,7 @@
 import { readFileSync, writeFileSync, rmSync } from 'node:fs';
 import { geoMercator, geoPath, geoContains } from 'd3-geo';
 import { build } from 'esbuild';
+import { fileURLToPath } from 'node:url';
 import { headerHtml, footerHtml, servicesSection, processSection, bundleSection, closeSection } from './site-content.mjs';
 
 const root = new URL('../', import.meta.url);
@@ -56,8 +57,8 @@ writeFileSync(new URL('site/index.html', root), html);
 
 rmSync(new URL('site/dist', root), { recursive: true, force: true });
 await build({
-  entryPoints: [new URL('site/src/main.js', root).pathname.replace(/^\//, '')],
-  outdir: 'site/dist', bundle: true, splitting: true, format: 'esm', minify: true, target: 'es2020',
+  entryPoints: [fileURLToPath(new URL('site/src/main.js', root))],
+  outdir: fileURLToPath(new URL('site/dist', root)), bundle: true, splitting: true, format: 'esm', minify: true, target: 'es2020',
   chunkNames: '[name]-[hash]', legalComments: 'none', logLevel: 'info',
 });
 console.log('county svg', W, H, 'AA at', ((ax / W) * 100).toFixed(1) + '%', ((ay / H) * 100).toFixed(1) + '%');
