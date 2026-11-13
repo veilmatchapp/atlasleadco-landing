@@ -77,3 +77,21 @@ Alignment: all text left aligned, low on the stage. The visual object sits right
 - The tan haze at close range was the key light on the lacquer. Gloss and key light now fade as the camera dives.
 - Phones: dropped the second prompt and status lines, lowered the map below the header, shrank the stage 4 line so the window and headline do not overlap.
 - Stills for reduced motion and no WebGL are captured from the live globe (84 KB and 20 KB).
+
+## Globe change (owner brief 2026-11-13)
+Dense gold dot continents replaced with a cleaner globe, per the brief.
+- Grid: a latitude and longitude graticule every 15 degrees at line opacity 0.12, in the palette's gold. It reads as engraving: you notice it when you look, not before.
+- Coastlines: Natural Earth 110m land outlines (4,937 points, lightly simplified), drawn as thin 1.1 px lines at opacity 0.5. The antimeridian cut and the Antarctic base line are dropped so no stray lines cross the globe.
+- Great Lakes: the Natural Earth lake shorelines (1,779 points, full detail) are drawn as their own line. It starts as faint as the world coastline, then brightens (opacity 0.95), turns a lighter gold and thickens from 1.1 to about 3.4 px as the camera pushes in, and thickens a little more at county scale before the map takes over.
+- Kept: the dark lacquer body and the rim light. Removed: the three dot meshes, `dots.bin`, `dots.json` and their loader.
+- Credits: the footer now credits Natural Earth (coastlines and lakes), the US Census Bureau and OpenStreetMap contributors.
+
+Payload, measured with gzip (before, then after):
+| Piece | Before | After |
+|---|---|---|
+| Globe JS chunk | 142.6 KB | 149.4 KB |
+| Globe data (`dots.bin`, then `coast.bin` and `coast.json`) | 72.5 KB | 26.3 KB |
+| Total for the globe | 215.1 KB | 175.7 KB (18 percent smaller) |
+The JS chunk itself grew by 6.8 KB gzip because the thick lines need three.js's fat-line classes. The total the visitor downloads for the globe is smaller.
+
+Fallback stills were regenerated from the live globe (32 KB and 16 KB). New 390 and 1440 screenshots, a before/after sheet and the scroll video are in `hero/shots/` and `hero/video/`.

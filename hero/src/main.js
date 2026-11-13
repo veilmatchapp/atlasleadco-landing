@@ -49,7 +49,7 @@ function live() {
   const lap = $('.laptop'), f4Line = $('.f4 .w'), f4Aside = $('.f4 .aside'), f4Copy = $('.f4 .copy');
   const [a1, a2] = $$('.ask'), [s1, s2] = $$('.stat'), [m1, m2] = $$('.mail');
 
-  const S = { rot: 0, zoom: 0, ox: 0, oy: 0, global: 1, fill: 0, coast: 0, grat: 1, sizes: { w: 1, h: 1 } };
+  const S = { rot: 0, zoom: 0, ox: 0, oy: 0, global: 1, coast: 0, grat: 1, sizes: { w: 1, h: 1 } };
   const W = () => stage.clientWidth, H = () => stage.clientHeight;
   // where the globe sits at rest: right of centre on desktop, high on phones
   const ox0 = () => (isMobile() ? 0 : 0.27 * W());
@@ -80,10 +80,9 @@ function live() {
     .fromTo(S, { rot: 0 }, { rot: 1, duration: 0.34 }, 0.08)
     .fromTo(S, { zoom: 0, ox: ox0, oy: oy0 }, { zoom: 1, ox: fx, oy: fy, ease: 'power2.inOut', duration: 0.38 }, 0.08)
     .to(S, { grat: 0, duration: 0.18 }, 0.24)
-    // the coarse dots shrink away while the dense Michigan dots and the coastline grow in
+    // the world coastline and the grid fade out while the Great Lakes line brightens and thickens
     .to(S, { global: 0, ease: 'power2.in', duration: 0.14 }, 0.3)
     .to(S, { coast: 1, ease: 'power2.out', duration: 0.16 }, 0.3)
-    .to(S, { fill: 1, ease: 'power2.out', duration: 0.16 }, 0.36)
     .to(S, { zoom: 2, ease: 'power2.in', duration: 0.18 }, 0.46)
     // stage 3: the county grows out of the same screen point and draws itself
     .to(canvas, { opacity: 0, duration: 0.08 }, 0.58)
@@ -104,7 +103,7 @@ function live() {
     .to(box, { opacity: 0, duration: 0.05 }, 0.76)
     .fromTo(lap, { scale: 0.07, x: lapStartX, y: lapStartY }, { scale: 1, x: 0, y: 0, ease: 'power3.out', duration: 0.14 }, 0.78)
     .fromTo(lap, { opacity: 0 }, { opacity: 1, duration: 0.03 }, 0.78)
-    .fromTo(f4Line, { clipPath: 'inset(0 100% 0 0)' }, { clipPath: 'inset(0 0% 0 0)', ease: 'power2.inOut', duration: 0.06 }, 0.86)
+    .fromTo(f4Line, { clipPath: 'inset(0 101% 0 0)' }, { clipPath: 'inset(0 0% 0 0)', ease: 'power2.inOut', duration: 0.06 }, 0.86)
     .fromTo(f4Aside, { opacity: 0 }, { opacity: 1, duration: 0.04 }, 0.91)
     .to({}, { duration: 0.0001 }, 1); // pad so the timeline is exactly 1 long: positions above are scroll progress
 
@@ -165,7 +164,7 @@ function live() {
   if (params.has('debug')) {
     window.__atlas = {
       S, tl, lenis, typing,
-      seek: (p) => { const max = document.documentElement.scrollHeight - innerHeight; lenis.scrollTo(p * max, { immediate: true, force: true }); ScrollTrigger.update(); },
+      seek: (p) => { const max = seq.offsetHeight - innerHeight; lenis.scrollTo(p * max, { immediate: true, force: true }); ScrollTrigger.update(); },
     };
   }
 }
