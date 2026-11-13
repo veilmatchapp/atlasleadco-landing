@@ -1,6 +1,7 @@
 // Builds the inner pages into site/<slug>/index.html from build/site-content.mjs.
 import { mkdirSync, writeFileSync } from 'node:fs';
-import { pillars, waitlistServices, label, price, page, processSection, bundleSection, closeSection, formScript, steps } from './site-content.mjs';
+import { pillars, waitlistServices, page, formScript, steps } from './site-content.mjs';
+import { row, processSection, bundleSection, closeSection } from './sections.mjs';
 
 const out = (slug, html) => {
   const dir = new URL(`../site/${slug}/`, import.meta.url);
@@ -18,12 +19,12 @@ const form = ({ id, subject, fields, submit }) => `<form class="form" id="${id}"
 </form>`;
 
 /* ---- pillar pages ---- */
-const serviceItems = (list) => list.map((s) => `<li><h3>${s.name}</h3><p>${s.long}</p>${price(s.id)}${label(s)}</li>`).join('\n');
+const serviceItems = (list) => `<ul class="rows">${list.map((s, i) => row(s, i, 'long')).join('\n')}</ul>`;
 const pillarBody = (p, extra = '') => {
   const now = p.services.filter((s) => s.label === 'now'), wait = p.services.filter((s) => s.label === 'wait');
   return `<section class="paper"><div class="wrap">
-  <div class="group"><h2 class="s group-h">Available now</h2><ul class="svc-list">${serviceItems(now)}</ul></div>
-  ${wait.length ? `<div class="group" id="waitlist-services"><h2 class="s group-h">Coming soon: join the waitlist</h2><p>These are not available to order yet. Join the waitlist and Atlas will tell you when they are.</p><ul class="svc-list">${serviceItems(wait)}</ul></div>` : ''}
+  <div class="group"><h2 class="s group-h" data-r="mask"><span>Available now</span></h2>${serviceItems(now)}</div>
+  ${wait.length ? `<div class="group" id="waitlist-services"><h2 class="s group-h" data-r="mask"><span>Coming soon: join the waitlist</span></h2><p>These are not available to order yet. Join the waitlist and Atlas will tell you when they are.</p>${serviceItems(wait)}</div>` : ''}
 </div></section>${extra}${processSection()}${closeSection()}`;
 };
 

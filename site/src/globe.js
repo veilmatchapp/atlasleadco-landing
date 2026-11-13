@@ -155,7 +155,7 @@ export async function createGlobe(canvas, S, { mobile = false, colors = {} } = {
     camera.aspect = w / h;
     landLine.material.resolution.set(w, h); lakeLine.material.resolution.set(w, h);
     const m = Math.min(1, w / h);
-    const cov = mobile ? 0.8 : 1.02; // fraction of half the short side the globe radius fills at rest; on desktop it bleeds off the frame
+    const cov = S.cov || (mobile ? 0.8 : 1.02); // fraction of half the short side the globe radius fills at rest (set from the page's globe slot)
     D0 = Math.sqrt(1 + Math.pow(1 / (cov * TAN * m), 2));
     D1 = 1 + 0.42 / (2 * TAN * m);
     D2 = 1 + 0.0135 / (2 * TAN * m); // county-sized view
@@ -195,5 +195,14 @@ export async function createGlobe(canvas, S, { mobile = false, colors = {} } = {
     renderer.render(scene, camera);
   }
 
-  return { render, resize, setActive: (a) => { active = a; last = 0; }, dispose: () => renderer.dispose() };
+  // screen position of a lat/lon on the globe (stage pixels), and whether that point faces the camera
+  const tmp = new Vector3(), cam = new Vector3();
+  function project(lon, lat) {
+    tmp.copy(vec(lon, lat)).multiplyScalar(1.004).applyQuaternion(globe.quaternion);
+    const facing = tmp.dot(cam.copy(camera.position).sub(tmp)) > 0;
+    tmp.project(camera);
+    return { x: (tmp.x * 0.5 + 0.5) * w, y: (-tmp.y * 0.5 + 0.5) * h, facing };
+  }
+
+  return { render, resize, project, setActive: (a) => { active = a; last = 0; }, dispose: () => renderer.dispose() };
 }

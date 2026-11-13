@@ -1,12 +1,13 @@
 // Assembles public/ from site/: exactly the files visitors need, no screenshots, video or sources.
 // Vercel serves public/ as plain static files (see vercel.json); nothing is built on Vercel.
-import { cpSync, rmSync, mkdirSync, writeFileSync, existsSync } from 'node:fs';
+import { cpSync, rmSync, mkdirSync, writeFileSync, existsSync, readdirSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 const root = (p) => fileURLToPath(new URL(`../${p}`, import.meta.url));
 const pages = ['ai', 'security', 'websites', 'checkup', 'how-it-works', 'plans', 'about', 'contact', 'privacy'];
-rmSync(root('public'), { recursive: true, force: true });
-mkdirSync(root('public'));
-for (const f of ['index.html', 'base.css', 'pages.css', 'hero.css', 'config.js', 'forms.js', 'atlas-logo.png']) cpSync(root(`site/${f}`), root(`public/${f}`));
+// empty public/ rather than deleting the folder itself: on Windows a server running inside it would block the delete
+mkdirSync(root('public'), { recursive: true });
+for (const name of readdirSync(root('public'))) rmSync(root(`public/${name}`), { recursive: true, force: true });
+for (const f of ['index.html', 'base.css', 'pages.css', 'sections.css', 'hero.css', 'config.js', 'forms.js', 'atlas-logo.png']) cpSync(root(`site/${f}`), root(`public/${f}`));
 for (const d of ['fonts', 'dist', ...pages]) cpSync(root(`site/${d}`), root(`public/${d}`), { recursive: true });
 mkdirSync(root('public/assets'));
 for (const f of ['coast.bin', 'coast.json', 'still-globe.webp', 'still-michigan.webp']) cpSync(root(`site/assets/${f}`), root(`public/assets/${f}`));

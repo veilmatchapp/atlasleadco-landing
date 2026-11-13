@@ -59,13 +59,19 @@ function live() {
   const towns = $$('.town', svg), townText = $$('.town text', svg), halos = $$('.town .halo', svg);
   const mapLine = $$('.f3 .m > span'), mapAside = $('.f3 .aside'), mapCopy = $('.f3 .copy');
   const lap = $('.laptop'), f4Line = $('.f4 .w'), f4Aside = $('.f4 .aside'), f4Copy = $('.f4 .copy');
+  const f2Line = $('.f2 .m > span'), f2Aside = $('.f2 .aside'), f2Copy = $('.f2 .copy'), lks = $$('.lk'), pin = $('.pin-aa');
   const [a1, a2] = $$('.ask'), [s1, s2] = $$('.stat'), [m1, m2] = $$('.mail');
 
+  let visible = true, globe = null, lastOn = false, labelsOn = false;
   const S = { rot: 0, zoom: 0, ox: 0, oy: 0, global: 1, coast: 0, grat: 1, sizes: { w: 1, h: 1 } };
   const W = () => stage.clientWidth, H = () => stage.clientHeight;
-  // where the globe sits at rest: right of centre on desktop, high on phones
-  const ox0 = () => (isMobile() ? 0 : 0.27 * W());
-  const oy0 = () => (isMobile() ? -0.2 * H() : -0.02 * H());
+  // where the globe rests: the page's globe slot (right of centre on desktop, the free space above the headline on phones).
+  // The placeholder svg fills the slot now and the live globe is positioned from it, so the swap does not move anything.
+  const ph = $('.ph');
+  const rest = () => { const r = ph.getBoundingClientRect(), sr = stage.getBoundingClientRect(); return { cx: r.left - sr.left + r.width / 2, cy: r.top - sr.top + r.height / 2, R: r.width / 2 }; };
+  const ox0 = () => rest().cx - W() / 2;
+  const oy0 = () => rest().cy - H() / 2;
+  const applyRest = () => { S.cov = rest().R / (Math.min(1, W() / H()) * (H() / 2)); if (globe) globe.resize(); };
   // where Ann Arbor sits on the county map, relative to the stage centre
   const aa = () => {
     const [px, py] = svg.dataset.aa.split(' ').map(Number);
@@ -81,7 +87,7 @@ function live() {
     defaults: { ease: 'none' },
     scrollTrigger: {
       trigger: seq, start: 'top top', end: 'bottom bottom', scrub: 0.5, invalidateOnRefresh: true,
-      onRefreshInit: () => { gsap.set(box, { transformOrigin: `${aa().px}% ${aa().py}%` }); },
+      onRefreshInit: () => { applyRest(); gsap.set(box, { transformOrigin: `${aa().px}% ${aa().py}%` }); },
       onUpdate: (self) => gate(self.progress),
     },
   });
@@ -96,6 +102,13 @@ function live() {
     .to(S, { global: 0, ease: 'power2.in', duration: 0.14 }, 0.3)
     .to(S, { coast: 1, ease: 'power2.out', duration: 0.16 }, 0.3)
     .to(S, { zoom: 2, ease: 'power2.in', duration: 0.18 }, 0.46)
+    // stage 2: the Great Lakes frame gets its own copy, the lake names and the Ann Arbor pin
+    .fromTo(f2Line, { yPercent: 108 }, { yPercent: 0, ease: 'power3.out', duration: 0.05 }, 0.31)
+    .fromTo(f2Aside, { opacity: 0 }, { opacity: 1, duration: 0.04 }, 0.35)
+    .fromTo(lks, { opacity: 0 }, { opacity: 1, duration: 0.03, stagger: { amount: 0.04 } }, 0.37)
+    .fromTo(pin, { opacity: 0 }, { opacity: 1, duration: 0.04 }, 0.4)
+    .to(f2Copy, { opacity: 0, duration: 0.04 }, 0.55)
+    .to([...lks, pin], { opacity: 0, duration: 0.04 }, 0.56)
     // stage 3: the county grows out of the same screen point and draws itself
     .to(canvas, { opacity: 0, duration: 0.08 }, 0.58)
     .fromTo(box, { scale: 0.55, opacity: 0 }, { scale: 1, opacity: 1, ease: 'power2.out', duration: 0.1 }, 0.58)
@@ -152,10 +165,10 @@ function live() {
   resetTyping();
 
   /* ---------- gating: pause the render loop off screen, run and reset typing ---------- */
-  let visible = true, globe = null, lastOn = false;
   new IntersectionObserver(([e]) => { visible = e.isIntersecting; }).observe(stage);
   function gate(p) {
     if (globe) globe.setActive(visible && p < 0.7);
+    labelsOn = p > 0.28 && p < 0.62;
     const on = p > 0.66 && p < 0.8;
     if (on !== lastOn) { lastOn = on; towns.forEach((t) => t.classList.toggle('on', on)); }
     if (p > 0.905 && !typed) { typed = true; typing.restart(); }
@@ -164,9 +177,21 @@ function live() {
 
   /* ---------- the 3D chunk loads after the page has painted, so the headline stays the LCP ---------- */
   const start3D = () => import('./globe.js').then(async (m) => {
+    applyRest();
     globe = await m.createGlobe(canvas, S, { mobile: isMobile(), colors: themeColors() });
     gsap.ticker.add((t) => globe.render(t));
+    // the lake names and the Ann Arbor pin follow the globe while the Great Lakes frame is on screen
+    const marks = [[$('.lk-sup'), -87.6, 47.6], [$('.lk-mich'), -87.0, 43.9], [$('.lk-hur'), -82.2, 44.9], [$('.lk-erie'), -81.1, 42.2], [$('.lk-ont'), -77.9, 43.7], [pin, -83.743, 42.2808]];
+    gsap.ticker.add(() => {
+      if (!labelsOn) return;
+      for (const [el, lon, lat] of marks) {
+        const q = globe.project(lon, lat);
+        el.style.transform = el === pin ? `translate(${q.x}px,${q.y}px)` : `translate(${q.x}px,${q.y}px) translate(-50%,-50%)`;
+        el.style.visibility = q.facing ? 'visible' : 'hidden';
+      }
+    });
     world.classList.add('ready');
+    ph.classList.add('off');
     ScrollTrigger.refresh();
   });
   const idle = window.requestIdleCallback || ((f) => setTimeout(f, 200));

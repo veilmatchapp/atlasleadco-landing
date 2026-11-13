@@ -11,6 +11,7 @@
 <link rel="icon" href="data:,">
 <link rel="stylesheet" href="base.css">
 <link rel="stylesheet" href="pages.css">
+<link rel="stylesheet" href="sections.css">
 <link rel="stylesheet" href="hero.css">
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"ProfessionalService","name":"Atlas","url":"https://www.atlasleadco.com/","description":"AI, security and web services for small offices in Ann Arbor and Saline, Michigan.","areaServed":[{"@type":"City","name":"Ann Arbor"},{"@type":"City","name":"Saline"}]}</script>
 <script>(function(){var r=document.documentElement,rm=matchMedia('(prefers-reduced-motion: reduce)').matches,gl=false;try{var c=document.createElement('canvas'),x=c.getContext('webgl2')||c.getContext('webgl');gl=!!x;var e=x&&x.getExtension('WEBGL_lose_context');if(e)e.loseContext()}catch(_){}r.classList.add('js');if(rm||!gl||/[?&]static/.test(location.search))r.classList.add('static')})()</script>
@@ -27,6 +28,7 @@
 
     <!-- stage 1 -->
     <div class="frame f1">
+      <div class="globe-slot"><!--GLOBEPH--></div>
       <img class="still" src="assets/still-globe.webp" width="1585" height="1000" alt="A dark globe with faint grid lines and thin coastlines" loading="lazy">
       <div class="copy">
         <h1 id="h1">One local partner for your AI, security and website.</h1>
@@ -38,7 +40,12 @@
     <!-- stage 2 (still frame only; in the live sequence this is the camera move) -->
     <div class="frame f2">
       <img class="still" src="assets/still-michigan.webp" width="1585" height="1000" alt="The Great Lakes drawn as a bright line" loading="lazy">
-      <div class="copy"><p class="line">Zoom in on Michigan and the Great Lakes.</p></div>
+      <p class="lk lk-sup" aria-hidden="true">Lake Superior</p><p class="lk lk-mich" aria-hidden="true">Lake Michigan</p><p class="lk lk-hur" aria-hidden="true">Lake Huron</p><p class="lk lk-erie" aria-hidden="true">Lake Erie</p><p class="lk lk-ont" aria-hidden="true">Lake Ontario</p>
+      <div class="pin-aa" aria-hidden="true"><i></i><span>Ann Arbor</span></div>
+      <div class="copy">
+        <p class="line"><span class="m"><span>Atlas works in Ann Arbor and Saline.</span></span></p>
+        <p class="aside">From the whole globe down to Washtenaw County, Michigan.</p>
+      </div>
     </div>
 
     <!-- stage 3 -->
@@ -100,5 +107,6 @@
 <!--FOOTER-->
 
 <script type="module" src="dist/main.js"></script>
+<script type="module" src="dist/reveal.js"></script>
 </body>
 </html>

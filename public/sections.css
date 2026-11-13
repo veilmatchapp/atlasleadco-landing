@@ -1,0 +1,116 @@
+/* Sections below the hero. Same type as the hero (large, light, tight tracking), depth from layered dark panels on paper,
+   and one different small reveal per kind of content. Hidden states only apply once reveal.js has added html.rv. */
+
+/* ---- reveals ---- */
+[data-r="mask"]{overflow:hidden;padding-bottom:.14em;margin-bottom:-.14em}
+[data-r="mask"]>span{display:block;transition:transform .95s cubic-bezier(.2,.7,.1,1)}
+html.rv [data-r="mask"]:not(.in)>span{transform:translateY(108%)}
+[data-r="fade"]{transition:opacity .9s ease}
+html.rv [data-r="fade"]:not(.in){opacity:0}
+[data-r="wipe"]{clip-path:inset(-10px -10px -10px -10px);transition:clip-path .9s cubic-bezier(.6,0,.2,1) calc(var(--i,0) * 70ms)}
+html.rv [data-r="wipe"]:not(.in){clip-path:inset(0 100% 0 0)}
+.engrave{position:absolute;color:var(--secondary);opacity:.15;pointer-events:none;transition:opacity 2.4s ease,transform 3.6s cubic-bezier(.2,.7,.1,1)}
+html.rv .engrave:not(.in){opacity:0;transform:rotate(-8deg)}
+@media (prefers-reduced-motion:reduce){[data-r],[data-r]>span,.engrave,.row,.layer,.checks li,[data-step],.sw-row,.sw,.sw::after,.node{transition:none!important}}
+
+/* the layered panels and engraved art reach past the column; clip them so the page never scrolls sideways (clip, not hidden, so sticky still works) */
+.paper,.ink{overflow-x:clip}
+
+/* ---- headings: the hero's scale and weight ---- */
+.big{margin:0 0 .35em;max-width:14em;font-weight:400;font-size:clamp(2.5rem,5.4vw,5.6rem);line-height:.97;letter-spacing:-.042em;text-wrap:balance}
+.big.huge{font-size:clamp(2.8rem,7.2vw,7.4rem);line-height:.94;letter-spacing:-.045em;max-width:11em}
+.lede.on-ink{color:var(--text2)}
+
+/* ---- services: one band per pillar, a demo beside the service rows, sides alternating ---- */
+.band{display:grid;gap:clamp(28px,4vw,64px);grid-template-columns:minmax(0,1fr);padding-top:clamp(48px,7vw,104px)}
+@media (min-width:960px){
+  .band{grid-template-columns:minmax(0,5fr) minmax(0,7fr);align-items:start}
+  .band:nth-of-type(even) .band-head{order:2}
+  .band:nth-of-type(even) .band-body{order:1}
+  .band-head{position:sticky;top:96px}
+}
+.band-head h3{margin:0 0 .35em;font-weight:600;font-size:clamp(1.9rem,3.2vw,3.1rem);line-height:1;letter-spacing:-.032em}
+.band-head>p{margin:0;max-width:26em;color:var(--ink2);font-size:clamp(1.05rem,1.3vw,1.2rem)}
+
+.rows{list-style:none;margin:0;padding:0}
+.row{display:grid;grid-template-columns:minmax(0,1fr);gap:.4em 1.5em;margin:0 -1.2em;padding:1.1em 1.2em;transition:background-color .25s ease,transform .25s ease}
+@media (min-width:700px){.row{grid-template-columns:minmax(0,1fr) auto}}
+.row:hover,.row:focus-within{background:rgba(16,28,43,.055);transform:translateX(4px)}
+.r-main b{display:block;font-weight:600;font-size:clamp(1.12rem,1.5vw,1.4rem);line-height:1.2;letter-spacing:-.015em}
+.r-main .d{display:block;margin-top:.3em;max-width:36em;color:var(--ink2);line-height:1.45}
+.row.wait .r-main b{color:var(--ink2)}
+.row .lbl{align-self:start;margin-top:.3em;white-space:nowrap}
+.band-body .more{display:inline-block;margin-top:1.2em}
+
+/* ---- demos: a light window in a dark layered panel, so the workflow is shown, not described ---- */
+.demo{position:relative;isolation:isolate;margin:clamp(24px,3vw,40px) 0 0;max-width:30rem;padding:clamp(16px,2vw,24px)}
+.demo::after{content:"";position:absolute;inset:0;z-index:-1;background:var(--ground);box-shadow:0 46px 70px -46px rgba(16,28,43,.7)}
+.demo::before{content:"";position:absolute;inset:12px -12px -12px 12px;z-index:-2;background:var(--ground2)}
+.demo figcaption{margin:16px 0 0;color:var(--text3);font-size:.84rem;line-height:1.4}
+.win{background:var(--ui-paper);color:var(--ui-ink);padding:14px 16px;font:400 .92rem/1.4 "UI",system-ui,sans-serif;min-height:12.5rem}
+.win-bar{margin:0 0 12px;font-weight:600;color:var(--ui-mute);font-size:.82rem}
+.bub{margin:0 0 10px;padding:.65em .85em;background:#fff;border:1px solid var(--ui-line);border-radius:10px 10px 10px 2px;min-height:2.4em}
+.bub.ans,.bub.auto{background:var(--ui-accent);border-color:var(--ui-accent);color:#fff;border-radius:10px 10px 2px 10px}
+.out{list-style:none;margin:0;padding:0;display:grid;gap:6px}
+.out li,.logged{display:flex;align-items:center;gap:.6em;margin:0;color:var(--ui-ink)}
+.out i{flex:none;width:.95em;height:.95em;border-radius:50%;background:var(--ui-accent);position:relative}
+.out i::after{content:"";position:absolute;left:.3em;top:.16em;width:.2em;height:.4em;border:solid #fff;border-width:0 .12em .12em 0;transform:rotate(45deg)}
+.miss{display:flex;justify-content:space-between;gap:1em;margin:0 0 10px;padding:.65em .85em;background:#fff;border:1px solid var(--ui-line);border-left:4px solid #B3261E;border-radius:2px}
+.miss b{font-weight:600}.miss span{color:var(--ui-mute)}
+.logged{color:var(--ui-mute);font-size:.85rem;margin-top:4px}
+.sw-row{display:flex;justify-content:space-between;align-items:center;gap:1em;padding:.55em 0;border-bottom:1px solid var(--ui-line)}
+.sw{position:relative;flex:none;width:34px;height:20px;border-radius:20px;background:#C3C9D1;transition:background-color .3s ease}
+.sw::after{content:"";position:absolute;top:2px;left:2px;width:16px;height:16px;border-radius:50%;background:#fff;transition:transform .3s ease}
+.sw-row.on .sw{background:var(--ui-accent)}
+.sw-row.on .sw::after{transform:translateX(14px)}
+.sw-done{margin:12px 0 0;color:var(--ui-accent);font-weight:600}
+[data-step],.sw-row,.sw-done{transition:opacity .45s ease,transform .45s ease}
+html.rv [data-step]:not(.show),html.rv .sw-row:not(.show),html.rv .sw-done:not(.show){opacity:0;transform:translateY(6px)}
+
+/* ---- the process: ink ground, an engraved graticule, a line that draws between the steps ---- */
+.ink{position:relative;overflow:hidden;background:var(--ground);color:var(--text);padding:clamp(72px,10vw,150px) 0}
+.ink .paper-in{position:relative;z-index:1}
+.proc .engrave{right:-12%;top:-30%;width:min(86vw,980px)}
+.track{--p:0;position:relative;list-style:none;margin:clamp(40px,6vw,88px) 0 0;padding:0;display:grid;gap:clamp(40px,5vw,56px);grid-template-columns:minmax(0,1fr)}
+.track li{position:relative;padding:0 0 0 58px;opacity:.6;transition:opacity .5s ease}
+.track li.on{opacity:1}
+.track::before,.track::after{content:"";position:absolute;left:11px;top:0;width:2px}
+.track::before{height:100%;background:var(--text3);opacity:.35}
+.track::after{height:calc(100% * var(--p));background:var(--gold)}
+.node{position:absolute;left:0;top:6px;width:24px;height:24px;border-radius:50%;background:var(--ground);box-shadow:0 0 0 2px var(--text3);transition:background-color .4s ease,box-shadow .4s ease}
+.track li.on .node{background:var(--gold);box-shadow:0 0 0 2px var(--gold)}
+.track .num{display:block;margin-bottom:.1em;font-size:clamp(3rem,6vw,5.6rem);line-height:1;letter-spacing:-.05em}
+.track h3{margin:0 0 .4em;font-weight:600;font-size:1.25rem;line-height:1.2}
+.track p{margin:0;color:var(--text2);max-width:24em}
+@media (min-width:860px){
+  .track{grid-template-columns:repeat(4,minmax(0,1fr))}
+  .track li{padding:58px 0 0}
+  .track::before,.track::after{left:0;top:11px;height:2px}
+  .track::before{width:100%}
+  .track::after{width:calc(100% * var(--p))}
+  .node{top:0}
+}
+
+/* ---- bundle: layers that assemble, then the items check themselves off ---- */
+.stack{position:relative;max-width:46rem;margin:clamp(32px,4vw,56px) 40px 44px 0}
+.stack .layer{position:absolute;inset:0;transition:transform .95s cubic-bezier(.2,.7,.1,1)}
+.stack .l2{background:var(--ground2)}
+.stack .l3{background:var(--ink2)}
+.stack.in .l2{transform:translate(14px,14px)}
+.stack.in .l3{transform:translate(28px,28px)}
+.bundle2{position:relative;padding:clamp(28px,4vw,56px);background:var(--ground);color:var(--text);box-shadow:0 50px 80px -50px rgba(16,28,43,.75)}
+.bundle2 h3{margin:0 0 .25em;font-weight:400;font-size:clamp(2.1rem,4.2vw,3.6rem);line-height:1;letter-spacing:-.042em}
+.bundle2 p{margin:0 0 1em;color:var(--text2);max-width:30em}
+.bundle2 .price{color:var(--text);font-weight:600}
+.bundle2 a{color:var(--text)}
+.bundle2 a.btn{color:var(--ground)}
+.checks{list-style:none;margin:1.3em 0;padding:0;display:grid;gap:.75em}
+.checks li{display:flex;gap:.75em;align-items:flex-start;font-size:1.12rem;transition:opacity .5s ease calc(var(--i) * 150ms + 500ms)}
+.checks i{flex:none;position:relative;width:1.3em;height:1.3em;margin-top:.1em;border-radius:50%;background:var(--gold)}
+.checks i::after{content:"";position:absolute;left:.42em;top:.2em;width:.32em;height:.6em;border:solid var(--ground);border-width:0 .15em .15em 0;transform:rotate(45deg)}
+html.rv .stack:not(.in) .checks li{opacity:0}
+
+/* ---- the closing call ---- */
+.close .engrave{left:-14%;bottom:-48%;width:min(90vw,1000px)}
+.close .big{margin-bottom:.3em}
+.close .btns{margin-top:clamp(24px,3vw,40px)}

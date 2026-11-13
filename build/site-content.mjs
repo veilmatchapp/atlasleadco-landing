@@ -137,6 +137,7 @@ export function page({ slug, title, desc, current, h1, lede, body, hero = true, 
 <link rel="preload" href="/fonts/grotesk-600.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="/base.css">
 <link rel="stylesheet" href="/pages.css">
+<link rel="stylesheet" href="/sections.css">
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
@@ -147,67 +148,8 @@ ${body}
 </main>
 ${footerHtml()}
 ${scripts}
+<script type="module" src="/dist/reveal.js"></script>
 </body>
 </html>
 `;
 }
-
-// reusable blocks
-export const servicesSection = ({ homeOnly = false } = {}) => `<section class="paper" id="services" aria-labelledby="svc-h">
-  <div class="paper-in">
-    <h2 id="svc-h">One local partner for your AI, your security and your website.</h2>
-    <p class="lede">Atlas works with offices in Ann Arbor and Saline. Each service has a fixed price and starts with a call, and each one is labeled so you know what you can start today.</p>
-    <div class="pillars">
-${pillars.map((p) => `      <article class="pillar">
-        <h3>${p.name}</h3>
-        <p>${p.pitch}</p>
-        <ul class="svc">
-${p.services.filter((s) => !homeOnly || s.home).map((s) => `          <li><b>${s.name}</b><span class="d">${s.short}</span>${label(s)}</li>`).join('\n')}
-        </ul>
-        <a class="more" href="/${p.slug}/">${p.link}</a>
-      </article>`).join('\n')}
-    </div>
-    <div class="paper-cta">
-      <a class="btn btn--ink" href="/checkup/">Get a free Atlas Checkup</a>
-      <a class="btn2" href="/contact/">Book a call</a>
-      <p class="note">The Checkup uses only public information about your business. Nothing is scanned, no logins are tried and nothing touches your systems.</p>
-    </div>
-  </div>
-</section>`;
-
-export const processSection = () => `<section class="paper" id="process" aria-labelledby="proc-h">
-  <div class="paper-in">
-    <h2 id="proc-h">How it works</h2>
-    <p class="lede">The same four steps for every service.</p>
-    <ol class="steps">
-${steps.map((s) => `      <li><h3>${s.h}</h3><p>${s.p}</p></li>`).join('\n')}
-    </ol>
-  </div>
-</section>`;
-
-export const bundleSection = () => `<section class="paper" id="plans" aria-labelledby="plans-h">
-  <div class="paper-in">
-    <h2 id="plans-h">Bundles for a whole office</h2>
-    <p class="lede">Some offices want the basics covered every month. A bundle groups services into one fixed monthly price per office.</p>
-    <div class="bundle">
-      <h3>Atlas Essentials</h3>
-      <p>A security baseline for the office, kept up month after month.</p>
-      <ul>
-        <li>Security baseline (the <a href="/security/">security assessment and fixes</a>)</li>
-        <li>Email protection</li>
-        <li>Security awareness training</li>
-        <li>A care plan for your website</li>
-      </ul>
-      <p class="price">Fixed price, per office, monthly. ${price('bundle-essentials') || 'Book a call for the price.'}</p>
-      <a class="btn" href="/contact/">Book a call</a>
-    </div>
-  </div>
-</section>`;
-
-export const closeSection = () => `<section class="paper" id="start" aria-labelledby="start-h">
-  <div class="paper-in">
-    <h2 id="start-h">Start with a free Atlas Checkup.</h2>
-    <p class="lede">Atlas looks at what is public about your business and tells you what it finds. No login, no scan, nothing touches your systems.</p>
-    <div class="paper-cta"><a class="btn btn--ink" href="/checkup/">Get a free Atlas Checkup</a><a class="btn2" href="/contact/">Book a call</a></div>
-  </div>
-</section>`;

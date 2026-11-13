@@ -3,7 +3,9 @@ import { readFileSync, writeFileSync, rmSync } from 'node:fs';
 import { geoMercator, geoPath, geoContains } from 'd3-geo';
 import { build } from 'esbuild';
 import { fileURLToPath } from 'node:url';
-import { headerHtml, footerHtml, servicesSection, processSection, bundleSection, closeSection } from './site-content.mjs';
+import { headerHtml, footerHtml } from './site-content.mjs';
+import { servicesSection, processSection, bundleSection, closeSection } from './sections.mjs';
+import { globeSvg } from './art.mjs';
 
 const root = new URL('../', import.meta.url);
 const read = (p) => JSON.parse(readFileSync(new URL(p, root), 'utf8'));
@@ -51,13 +53,13 @@ ${town('aa', ax, ay, 'Ann Arbor', 'end', -22)}${town('sa', sx, sy, 'Saline', 'st
 
 const src = readFileSync(new URL('site/index.src.html', root), 'utf8');
 const credit = '<span class="credit">Globe coastlines and lakes: Natural Earth. County outline: US Census Bureau. Roads and river: OpenStreetMap contributors.</span>';
-const html = src.replace('<!--COUNTY-->', svg).replace('<!--HEADER-->', headerHtml('', false)).replace('<!--FOOTER-->', footerHtml(credit))
+const html = src.replace('<!--COUNTY-->', svg).replace('<!--GLOBEPH-->', globeSvg()).replace('<!--HEADER-->', headerHtml('', false)).replace('<!--FOOTER-->', footerHtml(credit))
   .replace('<!--SERVICES-->', servicesSection({ homeOnly: true })).replace('<!--PROCESS-->', processSection()).replace('<!--BUNDLE-->', bundleSection()).replace('<!--CLOSE-->', closeSection());
 writeFileSync(new URL('site/index.html', root), html);
 
 rmSync(new URL('site/dist', root), { recursive: true, force: true });
 await build({
-  entryPoints: [fileURLToPath(new URL('site/src/main.js', root))],
+  entryPoints: [fileURLToPath(new URL('site/src/main.js', root)), fileURLToPath(new URL('site/src/reveal.js', root))],
   outdir: fileURLToPath(new URL('site/dist', root)), bundle: true, splitting: true, format: 'esm', minify: true, target: 'es2020',
   chunkNames: '[name]-[hash]', legalComments: 'none', logLevel: 'info',
 });
