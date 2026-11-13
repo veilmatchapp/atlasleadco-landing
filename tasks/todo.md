@@ -19,7 +19,9 @@
 - [x] 4b. Pages built: home (three-pillar hero, services, process, bundle, close), /ai, /security, /websites, /checkup, /how-it-works, /plans, /about, /contact, /privacy
 - [x] 4c. axe: zero violations on all 10 pages at 390 and 1440 (home scanned at its hero state only)
 - [x] 4d. Verified: LCP 707 ms and CLS 0 (DevTools trace), INP 64 ms worst case, keyboard, reduced motion, form logic. Record: tasks/site-verification-2026-11-13.md
+- [x] 5. Launched 2026-11-13 on www.atlasleadco.com; old site backed up and rollback documented in tasks/launch-2026-11-13.md
 - [ ] 4e. Open: real form delivery, inner-page traces, mid-scroll home scan
+- [ ] Apex domain: add the A record at the DNS host, then redirect apex to www
 - [ ] Needs the owner: Web3Forms access key, contact email for the fallback, privacy page review, credential line yes or no, launch plan (root index.html swap, Vercel plan, apex redirect)
 
 ## Not started, waiting on approval
