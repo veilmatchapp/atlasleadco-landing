@@ -18,7 +18,7 @@ const vec = (lon, lat) => new Vector3(Math.cos(lat * RAD) * Math.sin(lon * RAD),
 const ease = (t) => t * t * (3 - 2 * t);
 const clamp = (v, a, b) => Math.min(b, Math.max(a, v));
 
-const DEFAULTS = { body: 0x2a1910, key: 0xffd9a0, rim: 0xffb066, bloom: [255, 196, 110], grat: 0xc7a348, coast: 0xe4c987, lake: 0xf8e2a4 };
+const DEFAULTS = { body: 0x2a1910, key: 0xffd9a0, rim: 0xffb066, bloom: [255, 196, 110], glow: [0.95, 0.72, 0.34], grat: 0xc7a348, coast: 0xe4c987, lake: 0xf8e2a4 };
 const GRAT_OP = 0.12;  // the grid is engraving, not a cage
 const LAND_OP = 0.5;   // thin and faint
 const LAND_W = 1.1;    // CSS px
@@ -114,9 +114,9 @@ export async function createGlobe(canvas, S, { mobile = false, colors = {} } = {
   // warm edge glow, additive, drawn behind the globe
   const glow = new Mesh(new SphereGeometry(1.13, 64, 48), new ShaderMaterial({
     side: BackSide, transparent: true, depthWrite: false, blending: AdditiveBlending,
-    uniforms: { uA: { value: 0.35 } },
+    uniforms: { uA: { value: 0.35 }, uC: { value: new Vector3(...C.glow) } },
     vertexShader: 'varying vec3 vN; varying vec3 vV; void main(){ vec4 mv = modelViewMatrix * vec4(position,1.0); vN = normalize(normalMatrix * normal); vV = normalize(-mv.xyz); gl_Position = projectionMatrix * mv; }',
-    fragmentShader: 'varying vec3 vN; varying vec3 vV; uniform float uA; void main(){ float f = pow(abs(dot(normalize(vN), normalize(vV))), 3.2); gl_FragColor = vec4(vec3(0.95,0.72,0.34) * f * uA, f * uA); }',
+    fragmentShader: 'varying vec3 vN; varying vec3 vV; uniform float uA; uniform vec3 uC; void main(){ float f = pow(abs(dot(normalize(vN), normalize(vV))), 3.2); gl_FragColor = vec4(uC * f * uA, f * uA); }',
   }));
   scene.add(glow);
 

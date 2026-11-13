@@ -10,7 +10,19 @@ const $$ = (s, r = document) => [...r.querySelectorAll(s)];
 const root = document.documentElement;
 const params = new URLSearchParams(location.search);
 const isMobile = () => matchMedia('(max-width: 820px)').matches;
+// the globe takes its colours from the active theme's CSS tokens
+const themeColors = () => {
+  const cs = getComputedStyle(root), v = (n) => cs.getPropertyValue(n).trim(), rgb = (n) => v(n).split(',').map(Number);
+  return { body: v('--gl-body'), key: v('--gl-key'), rim: v('--gl-rim'), bloom: rgb('--gl-bloom'), glow: rgb('--gl-glow'), grat: v('--gl-grat'), coast: v('--gl-coast'), lake: v('--gl-lake') };
+};
 if (params.has('bare')) root.classList.add('bare');
+
+// header: dark ground once a light paper section is underneath it
+{
+  const header = $('.top'), paper = $('.paper');
+  const check = () => header.classList.toggle('solid', paper.getBoundingClientRect().top <= header.offsetHeight);
+  addEventListener('scroll', check, { passive: true }); addEventListener('resize', check); check();
+}
 
 /* ---------- typing: the full text is always laid out, so nothing reflows while it types ---------- */
 const typers = $$('.ty');
@@ -152,7 +164,7 @@ function live() {
 
   /* ---------- the 3D chunk loads after the page has painted, so the headline stays the LCP ---------- */
   const start3D = () => import('./globe.js').then(async (m) => {
-    globe = await m.createGlobe(canvas, S, { mobile: isMobile() });
+    globe = await m.createGlobe(canvas, S, { mobile: isMobile(), colors: themeColors() });
     gsap.ticker.add((t) => globe.render(t));
     world.classList.add('ready');
     ScrollTrigger.refresh();

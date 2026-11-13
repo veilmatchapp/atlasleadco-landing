@@ -8,7 +8,7 @@
 <meta name="theme-color" content="#241711">
 <link rel="preload" href="fonts/grotesk-600.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="hero.css">
-<script>(function(){var r=document.documentElement,rm=matchMedia('(prefers-reduced-motion: reduce)').matches,gl=false;try{var c=document.createElement('canvas'),x=c.getContext('webgl2')||c.getContext('webgl');gl=!!x;var e=x&&x.getExtension('WEBGL_lose_context');if(e)e.loseContext()}catch(_){}r.classList.add('js');if(rm||!gl||/[?&]static/.test(location.search))r.classList.add('static')})()</script>
+<script>(function(){var r=document.documentElement,rm=matchMedia('(prefers-reduced-motion: reduce)').matches,gl=false;try{var c=document.createElement('canvas'),x=c.getContext('webgl2')||c.getContext('webgl');gl=!!x;var e=x&&x.getExtension('WEBGL_lose_context');if(e)e.loseContext()}catch(_){}r.classList.add('js');var th=location.search.match(/[?&]theme=([ab])/i);r.setAttribute('data-theme',th?th[1].toLowerCase():'a');if(rm||!gl||/[?&]static/.test(location.search))r.classList.add('static')})()</script>
 </head>
 <body>
 <a class="skip" href="#sequence">Skip to content</a>
@@ -29,7 +29,8 @@
 
     <!-- stage 1 -->
     <div class="frame f1">
-      <img class="still" src="assets/still-globe.webp" width="1585" height="1000" alt="A gold dotted globe on a dark ground" loading="lazy">
+      <img class="still still-a" src="assets/still-globe-a.webp" width="1585" height="1000" alt="A dark globe with faint grid lines and thin coastlines" loading="lazy">
+      <img class="still still-b" src="assets/still-globe-b.webp" width="1585" height="1000" alt="A dark globe with faint grid lines and thin coastlines" loading="lazy">
       <div class="copy">
         <h1 id="h1">Get AI working in your office.</h1>
         <p class="sub">Atlas sets up Microsoft 365 Copilot, ChatGPT Business or Claude Team for offices in Ann Arbor and Saline, builds two or three workflows, and trains your staff. Fixed price.</p>
@@ -39,7 +40,8 @@
 
     <!-- stage 2 (still frame only; in the live sequence this is the camera move) -->
     <div class="frame f2">
-      <img class="still" src="assets/still-michigan.webp" width="1585" height="1000" alt="Gold dots outlining the Great Lakes and Michigan" loading="lazy">
+      <img class="still still-a" src="assets/still-michigan-a.webp" width="1585" height="1000" alt="The Great Lakes drawn as a bright line" loading="lazy">
+      <img class="still still-b" src="assets/still-michigan-b.webp" width="1585" height="1000" alt="The Great Lakes drawn as a bright line" loading="lazy">
       <div class="copy"><p class="line">Zoom in on Michigan and the Great Lakes.</p></div>
     </div>
 
@@ -89,6 +91,55 @@
         <p class="line"><span class="w">Your staff use it on the work they already do.</span></p>
         <p class="aside">Illustration of an AI assistant drafting in an email client. The people, company and dates are made up. It is not a screenshot of any product.</p>
       </div>
+    </div>
+  </div>
+</section>
+
+<section class="paper" id="services" aria-labelledby="svc-h">
+  <div class="paper-in">
+    <h2 id="svc-h">One local partner for your AI, your security and your website.</h2>
+    <p class="lede">Atlas works with offices in Ann Arbor and Saline. Each service has a fixed price and starts with a call, and each one is labeled so you know what you can start today.</p>
+    <div class="pillars">
+      <article class="pillar">
+        <h3>Work smarter with AI</h3>
+        <p>Set up the AI tools your staff already hear about, and teach people to use them safely.</p>
+        <ul class="svc">
+          <li><b>AI implementation sprint</b><span class="d">Set up Microsoft 365 Copilot, ChatGPT Business or Claude Team, build 2 to 3 real workflows and train your staff.</span><span class="lbl now">Available now</span></li>
+          <li><b>AI training workshop</b><span class="d">Half-day team training on safe, productive AI use.</span><span class="lbl now">Available now</span></li>
+          <li><b>AI assessment</b><span class="d">A written report on where AI saves your office time, with costs and step-by-step fixes.</span><span class="lbl now">Available now</span></li>
+          <li><b>Custom automations</b><span class="d">Intake, scheduling, reporting and document workflows, quoted per project.</span><span class="lbl now">Available now</span></li>
+        </ul>
+        <a class="more" href="/ai">See the AI services</a>
+      </article>
+      <article class="pillar">
+        <h3>Stay protected</h3>
+        <p>Close the gaps that cyber insurers ask about, and keep the paperwork ready for your next application.</p>
+        <ul class="svc">
+          <li><b>Security assessment</b><span class="d">A review of your Microsoft 365 or Google settings, MFA, admin accounts, backups and email security, with a scored report and prioritized fixes.</span><span class="lbl now">Available now</span></li>
+          <li><b>Security documentation pack</b><span class="d">Written policies, an incident response plan and an evidence folder for your next insurance application.</span><span class="lbl now">Available now</span></li>
+          <li><b>Microsoft 365 and Google Workspace hardening</b><span class="d">MFA, admin lockdown, sign-in rules and backups.</span><span class="lbl now">Available now</span></li>
+          <li><b>Email protection</b><span class="d">Filtering plus SPF, DKIM and DMARC set up properly.</span><span class="lbl now">Available now</span></li>
+          <li><b>Endpoint protection with 24/7 monitoring</b><span class="d">Proven engines plus a partner security operations center.</span><a class="lbl wait" href="/contact#waitlist">Join the waitlist</a></li>
+        </ul>
+        <a class="more" href="/security">See the security services</a>
+      </article>
+      <article class="pillar">
+        <h3>Get found and win the call</h3>
+        <p>A fast, honest website and a Google profile you own, so people find you and can reach you.</p>
+        <ul class="svc">
+          <li><b>Website rebuild</b><span class="d">Up to 5 or up to 12 pages.</span><span class="lbl now">Available now</span></li>
+          <li><b>Care plans</b><span class="d">Hosting, updates, backups, small edits and a monthly report.</span><span class="lbl now">Available now</span></li>
+          <li><b>Google Business Profile setup</b><span class="d">A profile you own, set up and optimized.</span><span class="lbl now">Available now</span></li>
+          <li><b>AI receptionist</b><span class="d">Answers, qualifies callers, books into your calendar and logs calls.</span><a class="lbl wait" href="/contact#waitlist">Join the waitlist</a></li>
+          <li><b>Missed-call text-back</b><span class="d">An automatic text reply to missed calls.</span><a class="lbl wait" href="/contact#waitlist">Join the waitlist</a></li>
+        </ul>
+        <a class="more" href="/websites">See the web services</a>
+      </article>
+    </div>
+    <div class="paper-cta">
+      <a class="btn btn--ink" href="/checkup">Get a free Atlas Checkup</a>
+      <a class="btn2" href="/contact">Book a call</a>
+      <p class="note">The Checkup uses only public information about your business. Nothing is scanned, no logins are tried and nothing touches your systems.</p>
     </div>
   </div>
 </section>

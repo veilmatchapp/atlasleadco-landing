@@ -13,7 +13,8 @@
 - [x] 1. CLAUDE.md rewritten for three pillars, committed and pushed (eee373f)
 - [x] 2. Globe change: grid and thin coastlines, before/after sheet, stills and video regenerated
 - [ ] 2. Owner reviews the globe
-- [ ] 3. Palette A vs B side by side, owner picks
+- [x] 3. Palette A vs B built side by side (?theme=a or ?theme=b), token plans in tasks/palette-*.md
+- [ ] 3. Owner picks a palette
 - [ ] 4. Pages and copy for all three pillars, checkup, bundles (prices hidden), full verification
 
 ## Not started, waiting on approval

@@ -38,7 +38,7 @@ const town = (id, x, y, name, anchor, dx) =>
 
 const svg = `<svg id="county" viewBox="0 0 ${W} ${H}" data-aa="${((ax / W) * 100).toFixed(2)} ${((ay / H) * 100).toFixed(2)}" role="img" aria-labelledby="county-t">
 <title id="county-t">Outline of Washtenaw County, Michigan, with Ann Arbor and Saline marked</title>
-<defs><pattern id="dots" width="18" height="18" patternUnits="userSpaceOnUse"><circle cx="9" cy="9" r="1.7" fill="#C7A348" fill-opacity=".62"/></pattern>
+<defs><pattern id="dots" width="18" height="18" patternUnits="userSpaceOnUse"><circle class="pat" cx="9" cy="9" r="1.7"/></pattern>
 <clipPath id="cc"><path d="${county}"/></clipPath></defs>
 <path class="base" d="${county}"/>
 <path class="fillshape" d="${county}"/>
