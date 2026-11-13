@@ -21,7 +21,7 @@ The site used to sell only AI. Atlas now sells three pillars together:
 
 Homepage idea, to rewrite in plain language without the copy tells below: one local partner for the AI, the security and the web presence of a small office in Ann Arbor or Saline.
 
-**Credential lines are not approved.** Don't publish any claim about who runs Atlas, their profession or their employer (for example "run by a working professional in X") without the owner's explicit yes in this conversation. Security buyers weigh credentials, so ask him once when the copy needs it.
+**No credential lines.** The owner decided on 2026-11-13 that the site does not need to say who runs Atlas, their profession or their employer. Don't add any such claim.
 
 **Capacity is limited.** Never promise 24/7 response, on-site emergencies or help-desk hours.
 
@@ -142,7 +142,7 @@ Commit and push after each step and report the hash. Stop for owner review after
 - Static HTML/CSS/JS with a small build step. No framework unless there's a reason. Self-host fonts and subset them (≤ 120 KB total).
 - The globe must earn its place: real data, centered on Ann Arbor, three.js with DPR capped, paused off-screen, and a static image fallback for reduced motion or no WebGL. Old site used three r128 from cdnjs. Don't reuse that.
 - Forms: Web3Forms free plan (250 submissions/month) for the checkup, the contact form and the waitlist. The access key is public by design.
-- Hosting: the site is currently on Vercel. Hobby is non-commercial only, so check the plan before launch. The alternative is Cloudflare Pages.
+- Hosting: the site is currently on Vercel. The owner treats it as a business card, not a lead engine (2026-11-13). Vercel Hobby is non-commercial only, which a business site arguably is not, so mention it once at launch; Cloudflare Pages is the free alternative. Do not swap the live root `index.html` for `site/` until the owner says to launch.
 - The bare domain atlasleadco.com has no A record today. Fix the apex → www redirect at launch.
 - Schema: ProfessionalService with areaServed Ann Arbor and Saline. No street address and no reviews markup.
 

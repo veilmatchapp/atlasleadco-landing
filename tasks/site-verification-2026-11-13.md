@@ -24,7 +24,7 @@ Run against `site/` served locally, built from commit `ad8c335`.
 
 ## Needs the owner
 - Web3Forms access key (public by design) and a contact email, both for `site/config.js`
-- Review of the privacy page wording, including whether to state that Atlas does not sell information
-- Whether the site may state who runs Atlas (no name): not approved, so nothing about it is published
-- Launch plan: the live root `index.html` is still the old page. Switching the host to serve `site/`, the Vercel plan (Hobby is non-commercial only) and the apex to www redirect
+- Web3Forms key and contact email: the owner is setting these up. Paste both into `site/config.js`.
+- Decided 2026-11-13: the privacy page states that Atlas does not sell information; no credential line about who runs Atlas; the site is a business card, so launch is low-stakes
+- Not yet done, on the owner's word to launch: the live root `index.html` is still the old page. Switching the host to serve `site/`, the Vercel Hobby terms question and the apex to www redirect
 - Prices stay hidden (SHOW_PRICES is false)
