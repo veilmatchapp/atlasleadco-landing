@@ -1,0 +1,74 @@
+/* inner pages: a dark page hero on the ink ground, then paper sections */
+.top.solid{background:var(--ground)}
+/* on inner pages the header lines up with the 1240px content column */
+.top.page{padding-inline:max(var(--gx),calc((100% - 1240px) / 2 + var(--gx)))}
+.phero{background:var(--ground);padding:clamp(112px,16vh,168px) 0 clamp(48px,7vw,96px)}
+.phero-in,.wrap{max-width:1240px;margin:0 auto;padding:0 var(--gx)}
+.phero h1{margin:0 0 .4em;max-width:13em;font-weight:400;font-size:clamp(2.5rem,5.4vw,5.2rem);line-height:.98;letter-spacing:-.04em;text-wrap:balance}
+.phero .lede{margin:0 0 clamp(24px,4vw,40px);max-width:36em;color:var(--text2);font-size:clamp(1.05rem,1.4vw,1.3rem)}
+.btns{display:flex;flex-wrap:wrap;align-items:center;gap:16px 28px}
+.btn--ghost{background:transparent;color:var(--text);box-shadow:inset 0 0 0 1.5px var(--text)}
+.btn--ghost:hover{background:var(--text);color:var(--ground)}
+.btn--block{width:100%;border:0;cursor:pointer;font-family:inherit}
+.btn--ink[disabled]{opacity:.55;cursor:not-allowed}
+.paper h2{max-width:18em}
+.paper h2.s{font-size:clamp(1.7rem,3vw,2.6rem);margin-bottom:.5em}
+.paper .wrap{padding:0 var(--gx)}
+.paper p{max-width:40em}
+.paper ul.plain{margin:0 0 1.2em;padding-left:1.2em;max-width:40em}
+.paper ul.plain li{margin:.4em 0}
+.paper + .paper{padding-top:0}
+.fine{font-size:.95rem;color:var(--ink2)}
+
+/* service lists on the pillar pages */
+.svc-list{list-style:none;margin:0;padding:0;display:grid;gap:clamp(28px,4vw,48px) clamp(32px,5vw,72px);grid-template-columns:minmax(0,1fr)}
+@media (min-width:860px){.svc-list{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.svc-list h3{margin:0 0 .3em;font-size:clamp(1.25rem,1.8vw,1.6rem);line-height:1.15;letter-spacing:-.015em;font-weight:600}
+.svc-list p{margin:0 0 .5em}
+.svc-list .price{color:var(--ink2);font-size:.95rem}
+.group-h{margin:0 0 1em;font-size:clamp(1.3rem,2vw,1.7rem);font-weight:600;letter-spacing:-.02em}
+.group + .group{margin-top:clamp(48px,7vw,96px)}
+
+/* the process: a real sequence */
+.steps{list-style:none;margin:0;padding:0;display:grid;gap:clamp(28px,4vw,44px);counter-reset:s;grid-template-columns:minmax(0,1fr)}
+@media (min-width:860px){.steps{grid-template-columns:repeat(4,minmax(0,1fr))}}
+.steps li{counter-increment:s}
+.steps li::before{content:counter(s);display:block;margin-bottom:.35em;color:var(--accent-dark);font-weight:600;font-size:clamp(2rem,3.4vw,3rem);line-height:1;letter-spacing:-.03em}
+.steps h3{margin:0 0 .4em;font-size:1.2rem;font-weight:600;line-height:1.2}
+.steps p{margin:0;color:var(--ink2);font-size:.98rem}
+
+/* a bundle: a dark panel on paper, different from the lists around it */
+.bundle{margin-top:clamp(28px,4vw,48px);padding:clamp(28px,4vw,52px);background:var(--ground);color:var(--text);max-width:46rem}
+.bundle h3{margin:0 0 .3em;font-size:clamp(1.6rem,2.6vw,2.4rem);font-weight:600;letter-spacing:-.03em;line-height:1.05}
+.bundle p{color:var(--text2);margin:0 0 1em}
+.bundle ul{margin:0 0 1.2em;padding-left:1.1em}
+.bundle li{margin:.3em 0}
+.bundle .price{color:var(--text);font-weight:600}
+.bundle a{color:var(--text)}
+.bundle a.btn{color:var(--ground)}
+
+/* forms */
+.form{display:grid;gap:18px;max-width:34rem}
+.form label{display:grid;gap:6px;font-weight:600;color:var(--ink)}
+.form label small{font-weight:400;color:var(--ink2)}
+.form input,.form select,.form textarea{width:100%;font:400 1.05rem/1.4 "Grotesk",system-ui,sans-serif;color:var(--ink);background:#fff;border:1.5px solid var(--ink2);border-radius:2px;padding:.7em .8em}
+.form textarea{min-height:7em;resize:vertical}
+.form input:focus-visible,.form select:focus-visible,.form textarea:focus-visible{outline:3px solid var(--accent-dark);outline-offset:2px}
+.form .hp{position:absolute;left:-9999px;height:0;overflow:hidden}
+.form-status{margin:0;padding:.9em 1em;border-left:4px solid var(--accent-dark);background:#fff;color:var(--ink);max-width:34rem}
+.form-status[hidden]{display:none}
+.form-status.err{border-left-color:#9B2C2C}
+.cols{display:grid;gap:clamp(36px,5vw,72px);grid-template-columns:minmax(0,1fr)}
+@media (min-width:900px){.cols{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}}
+
+/* footer */
+.end{padding:clamp(40px,6vw,72px) 0 36px}
+.end-in{max-width:1240px;margin:0 auto;padding:0 var(--gx);display:grid;gap:28px;grid-template-columns:minmax(0,1fr)}
+@media (min-width:760px){.end-in{grid-template-columns:minmax(0,1fr) auto}}
+.end nav{display:flex;flex-wrap:wrap;gap:8px 24px}
+.end nav a{padding:6px 0}
+.end .legal{grid-column:1/-1;margin:0}
+.end .credit{display:block;margin-top:6px}
+
+/* header navigation current page */
+.top nav a[aria-current="page"]{text-decoration:underline;text-underline-offset:6px;text-decoration-color:var(--gold)}

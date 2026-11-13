@@ -1,7 +1,7 @@
-# Side-by-side palette sheets: hero/shots/palette/{1440,390}-{a,b}-*.png -> sheet-AB-1440.png, sheet-AB-390.png
+# Side-by-side palette sheets: site/shots/palette/{1440,390}-{a,b}-*.png -> sheet-AB-1440.png, sheet-AB-390.png
 from PIL import Image, ImageDraw, ImageFont
 import os
-os.chdir(os.path.join(os.path.dirname(__file__), '..', 'hero', 'shots', 'palette'))
+os.chdir(os.path.join(os.path.dirname(__file__), '..', 'site', 'shots', 'palette'))
 F = 'C:/Windows/Fonts/segoeui.ttf'
 big, small = ImageFont.truetype(F, 30), ImageFont.truetype(F, 22)
 BG, FG, MUTE = (232, 232, 232), (20, 20, 20), (90, 90, 90)

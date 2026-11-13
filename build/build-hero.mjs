@@ -1,7 +1,8 @@
-// Builds hero/index.html (county SVG from the Census boundary + OSM roads/river) and bundles hero/dist.
+// Builds site/index.html (county SVG from the Census boundary + OSM roads/river) and bundles site/dist.
 import { readFileSync, writeFileSync, rmSync } from 'node:fs';
 import { geoMercator, geoPath, geoContains } from 'd3-geo';
 import { build } from 'esbuild';
+import { headerHtml, footerHtml, servicesSection, processSection, bundleSection, closeSection } from './site-content.mjs';
 
 const root = new URL('../', import.meta.url);
 const read = (p) => JSON.parse(readFileSync(new URL(p, root), 'utf8'));
@@ -47,13 +48,16 @@ const svg = `<svg id="county" viewBox="0 0 ${W} ${H}" data-aa="${((ax / W) * 100
 ${town('aa', ax, ay, 'Ann Arbor', 'end', -22)}${town('sa', sx, sy, 'Saline', 'start', 22)}
 </svg>`;
 
-const src = readFileSync(new URL('hero/index.src.html', root), 'utf8');
-writeFileSync(new URL('hero/index.html', root), src.replace('<!--COUNTY-->', svg));
+const src = readFileSync(new URL('site/index.src.html', root), 'utf8');
+const credit = '<span class="credit">Globe coastlines and lakes: Natural Earth. County outline: US Census Bureau. Roads and river: OpenStreetMap contributors.</span>';
+const html = src.replace('<!--COUNTY-->', svg).replace('<!--HEADER-->', headerHtml('', false)).replace('<!--FOOTER-->', footerHtml(credit))
+  .replace('<!--SERVICES-->', servicesSection({ homeOnly: true })).replace('<!--PROCESS-->', processSection()).replace('<!--BUNDLE-->', bundleSection()).replace('<!--CLOSE-->', closeSection());
+writeFileSync(new URL('site/index.html', root), html);
 
-rmSync(new URL('hero/dist', root), { recursive: true, force: true });
+rmSync(new URL('site/dist', root), { recursive: true, force: true });
 await build({
-  entryPoints: [new URL('hero/src/main.js', root).pathname.replace(/^\//, '')],
-  outdir: 'hero/dist', bundle: true, splitting: true, format: 'esm', minify: true, target: 'es2020',
+  entryPoints: [new URL('site/src/main.js', root).pathname.replace(/^\//, '')],
+  outdir: 'site/dist', bundle: true, splitting: true, format: 'esm', minify: true, target: 'es2020',
   chunkNames: '[name]-[hash]', legalComments: 'none', logLevel: 'info',
 });
 console.log('county svg', W, H, 'AA at', ((ax / W) * 100).toFixed(1) + '%', ((ay / H) * 100).toFixed(1) + '%');

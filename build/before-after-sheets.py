@@ -1,7 +1,7 @@
-# Builds the before/after sheets for the globe change: hero/shots/before-dots vs hero/shots/final.
+# Builds the before/after sheets for the globe change: site/shots/before-dots vs site/shots/final.
 from PIL import Image, ImageDraw, ImageFont
 import os
-os.chdir(os.path.join(os.path.dirname(__file__), '..', 'hero', 'shots'))
+os.chdir(os.path.join(os.path.dirname(__file__), '..', 'site', 'shots'))
 F = 'C:/Windows/Fonts/segoeui.ttf'
 font, small = ImageFont.truetype(F, 26), ImageFont.truetype(F, 22)
 BG, FG = (28, 20, 16), (242, 234, 219)

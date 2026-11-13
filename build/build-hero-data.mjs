@@ -1,6 +1,6 @@
 // Globe line data: world coastlines at a low level of detail, plus the Great Lakes shorelines at full detail.
 // Natural Earth land (public domain) via world-atlas, Natural Earth lakes (public domain).
-// Output: hero/assets/coast.bin and coast.json
+// Output: site/assets/coast.bin and coast.json
 //   land  : Int16 lon,lat in hundredths of a degree
 //   lakes : Uint16 lon,lat across a bounding box (about 30 m steps)
 import { readFileSync, writeFileSync, rmSync, existsSync } from 'node:fs';
@@ -43,7 +43,7 @@ lakePts.forEach(([x, y], i) => {
 });
 
 const out = Buffer.concat([Buffer.from(land16.buffer), Buffer.from(lake16.buffer)]);
-writeFileSync(new URL('hero/assets/coast.bin', root), out);
-writeFileSync(new URL('hero/assets/coast.json', root), JSON.stringify({ landRuns, lakeRuns, box }));
-for (const f of ['hero/assets/dots.bin', 'hero/assets/dots.json']) if (existsSync(new URL(f, root))) rmSync(new URL(f, root));
+writeFileSync(new URL('site/assets/coast.bin', root), out);
+writeFileSync(new URL('site/assets/coast.json', root), JSON.stringify({ landRuns, lakeRuns, box }));
+for (const f of ['site/assets/dots.bin', 'site/assets/dots.json']) if (existsSync(new URL(f, root))) rmSync(new URL(f, root));
 console.log({ landRuns: landRuns.length, landPts: landPts.length, lakeRings: rings.length, lakePts: lakePts.length, KB: (out.length / 1024).toFixed(0), gzKB: 'see below' });
