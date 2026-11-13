@@ -1,0 +1,7 @@
+[out:json][timeout:90];
+rel["boundary"="administrative"]["admin_level"="6"]["name"="Washtenaw County"]->.c;
+.c out geom;
+way["highway"="motorway"]["ref"~"I 94|US 23"](42.05,-84.15,42.40,-83.45);
+out geom;
+way["waterway"="river"]["name"="Huron River"](42.05,-84.15,42.40,-83.45);
+out geom;

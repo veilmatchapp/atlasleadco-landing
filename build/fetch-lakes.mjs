@@ -1,0 +1,10 @@
+import { writeFileSync } from 'node:fs';
+const url = 'https://raw.githubusercontent.com/nvkelso/natural-earth-vector/master/geojson/ne_50m_lakes.geojson';
+const r = await fetch(url, { headers: { 'User-Agent': 'static-site-build/1.0' }, signal: AbortSignal.timeout(60000) });
+console.log(r.status);
+const j = await r.json();
+console.log(j.features.length, 'lakes');
+const names = ['Lake Superior','Lake Michigan','Lake Huron','Lake Erie','Lake Ontario','Lake Saint Clair','Lake Winnipeg','Great Slave Lake','Great Bear Lake','Lake Nipigon','Lake Athabasca','Lake Winnipegosis'];
+const keep = j.features.filter((f) => names.includes(f.properties.name));
+console.log(keep.length, 'kept:', keep.map((f) => f.properties.name).join(', '));
+writeFileSync(new URL('../data/lakes.json', import.meta.url), JSON.stringify({ type: 'FeatureCollection', features: keep }));

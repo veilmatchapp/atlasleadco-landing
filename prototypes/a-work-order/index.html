@@ -1,0 +1,127 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Atlas | AI set up in your Ann Arbor or Saline office</title>
+<meta name="description" content="Atlas sets up Microsoft 365 Copilot, ChatGPT Business or Claude Team for your office, builds two or three workflows, and trains your staff. Fixed price. Ann Arbor and Saline.">
+<link rel="preload" href="fonts/franklin-700.woff2" as="font" type="font/woff2" crossorigin>
+<style>
+@font-face{font-family:"Franklin";src:url(fonts/franklin-400.woff2) format("woff2");font-weight:400;font-display:swap}
+@font-face{font-family:"Franklin";src:url(fonts/franklin-700.woff2) format("woff2");font-weight:700;font-display:swap}
+@font-face{font-family:"Typed";src:url(fonts/courier-400.woff2) format("woff2");font-weight:400;font-display:swap}
+
+:root{
+  --paper:#F2F3EF; --ink:#1C2733; --muted:#46525E; --carbon:#234E8F; --carbon-dark:#1B3F75;
+  --pink:#F0B9B6; --stamp:#B3261E; --sheet:#FFFFFF;
+  --gutter:clamp(16px,4vw,48px);
+}
+*,*::before,*::after{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--paper);color:var(--ink);font:400 18px/1.55 "Franklin",system-ui,sans-serif}
+img{max-width:100%;height:auto;display:block}
+a{color:inherit}
+:focus-visible{outline:3px solid var(--carbon);outline-offset:3px}
+.skip{position:absolute;left:-9999px;top:8px;background:#fff;color:var(--ink);padding:8px 12px;z-index:10}
+.skip:focus{left:8px}
+
+/* header: ink bar is the dark ground the white logo lettering needs */
+.bar{background:var(--ink);color:var(--paper)}
+.bar-in{max-width:1240px;margin:0 auto;padding:10px var(--gutter);display:flex;align-items:center;justify-content:space-between;gap:12px}
+.bar img{width:clamp(104px,28vw,128px)}
+.bar nav{display:flex;gap:clamp(12px,2.4vw,28px);font-size:16px;white-space:nowrap}
+.bar nav a{text-decoration:none;padding:8px 2px}
+.bar nav a:hover{text-decoration:underline;text-underline-offset:4px}
+.bar :focus-visible{outline-color:#fff}
+
+.hero{max-width:1240px;margin:0 auto;padding:clamp(32px,6vw,80px) var(--gutter) clamp(40px,6vw,88px);
+  display:grid;gap:clamp(36px,5vw,72px);grid-template-columns:1fr;align-items:center}
+@media (min-width:920px){.hero{grid-template-columns:minmax(0,5fr) minmax(0,6fr)}}
+
+h1{font-weight:700;font-size:clamp(2rem,4.1vw,3.5rem);line-height:1.08;letter-spacing:-.012em;margin:0 0 20px;max-width:17ch}
+.sub{margin:0 0 28px;max-width:34em;color:var(--ink)}
+.btn{display:inline-block;background:var(--carbon);color:#fff;font-weight:700;font-size:17px;text-decoration:none;padding:14px 24px;border-radius:3px}
+.btn:hover{background:var(--carbon-dark)}
+.note{margin:14px 0 0;font-size:15px;color:var(--muted)}
+
+/* the stack of carbon-copy sheets */
+.stack{position:relative;margin:0;padding:0 clamp(10px,2vw,22px) clamp(14px,2.4vw,26px) 0}
+.stack::after{content:"";position:absolute;inset:10px 2px 2px 12px;border-radius:2px;z-index:0;background:var(--pink);transform:rotate(1.6deg)}
+.form{position:relative;z-index:1;background:var(--sheet);border-radius:2px;padding:clamp(18px,3vw,34px);padding-bottom:clamp(66px,7vw,84px);transform:rotate(-1.2deg);
+  box-shadow:0 18px 32px -22px rgba(28,39,51,.55)}
+.form-head{display:flex;flex-wrap:wrap;align-items:baseline;justify-content:space-between;gap:4px 16px;margin-bottom:14px}
+.form-head h2{margin:0;font-size:clamp(1.4rem,2.4vw,1.9rem);line-height:1.1}
+.form-head p{margin:0;font-size:15px;color:var(--muted)}
+.row{display:grid;grid-template-columns:minmax(0,1fr);gap:2px;padding:10px 0;border-bottom:1px dotted rgba(28,39,51,.38)}
+@media (min-width:520px){.row{grid-template-columns:96px 1fr;gap:14px}}
+.row dt{font-weight:700;font-size:15px;color:var(--muted)}
+.row dd{margin:0;font:400 clamp(15px,1.5vw,17px)/1.5 "Typed",ui-monospace,monospace;color:var(--carbon)}
+.row ul{margin:0;padding:0;list-style:none}
+.row li+li{margin-top:2px}
+.tools{display:flex;flex-direction:column;gap:2px}
+.tools span{display:flex;align-items:center;gap:10px}
+.box{flex:none;width:16px;height:16px;border:1.5px solid var(--carbon);border-radius:2px;display:inline-grid;place-items:center}
+.box svg{width:12px;height:12px;stroke:var(--carbon);stroke-width:2.4;fill:none}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+figcaption{margin:18px 0 0;font-size:14px;color:var(--muted)}
+
+.stamp{position:absolute;right:clamp(16px,3vw,36px);bottom:clamp(14px,2vw,22px);z-index:2;border:3px solid var(--stamp);color:var(--stamp);
+  font-weight:700;font-size:clamp(1.1rem,2vw,1.5rem);line-height:1;padding:7px 14px;border-radius:5px;transform:rotate(-9deg);opacity:.88;
+  mix-blend-mode:multiply;background:rgba(255,255,255,.0);animation:thunk .34s cubic-bezier(.2,.9,.3,1.2) .5s both}
+@keyframes thunk{from{transform:rotate(-14deg) scale(1.45);opacity:0}to{transform:rotate(-9deg) scale(1);opacity:.88}}
+@media (prefers-reduced-motion:reduce){.stamp{animation:none}}
+
+footer{max-width:1240px;margin:0 auto;padding:0 var(--gutter) 32px;font-size:15px;color:var(--muted)}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="bar">
+  <div class="bar-in">
+    <a href="/" aria-label="Atlas Lead Group, home"><img src="atlas-logo.png" width="600" height="281" alt="Atlas Lead Group"></a>
+    <nav aria-label="Main">
+      <a href="/how-it-works">How it works</a>
+      <a href="/about">About</a>
+      <a href="/contact">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<main id="main" class="hero">
+  <div>
+    <h1>AI tools set up in your office, with your staff trained to use them.</h1>
+    <p class="sub">Atlas sets up Microsoft 365 Copilot, ChatGPT Business or Claude Team, builds two or three workflows around the work your office repeats every week, and trains your staff. One fixed price, for offices in Ann Arbor and Saline.</p>
+    <a class="btn" href="/contact">Book a call</a>
+    <p class="note">The call is where we agree on the tool, the workflows and the price.</p>
+  </div>
+
+  <figure style="margin:0">
+   <div class="stack">
+    <div class="form">
+      <div class="form-head">
+        <h2>Work order</h2>
+        <p>AI implementation sprint</p>
+      </div>
+      <dl style="margin:0">
+        <div class="row"><dt>For</dt><dd>Your office, Ann Arbor or Saline</dd></div>
+        <div class="row"><dt>AI tool</dt><dd class="tools">
+          <span><i class="box"><svg viewBox="0 0 12 12" aria-hidden="true"><path d="M2 6.5l2.7 2.7L10 2.8"/></svg></i>Microsoft 365 Copilot<b class="sr"> (selected)</b></span>
+          <span><i class="box"></i>ChatGPT Business</span>
+          <span><i class="box"></i>Claude Team</span></dd></div>
+        <div class="row"><dt>Workflows</dt><dd><ul>
+          <li>Renewal letter from the lease file</li>
+          <li>Client call to follow-up email</li>
+          <li>Weekly numbers in one summary</li></ul></dd></div>
+        <div class="row"><dt>Training</dt><dd>Your staff, on the tool and workflows</dd></div>
+        <div class="row"><dt>Price</dt><dd>Fixed price, agreed first</dd></div>
+      </dl>
+      <div class="stamp" aria-hidden="true">Fixed price</div>
+    </div>
+   </div>
+    <figcaption>Example work order. An illustration of the scope, not a client record.</figcaption>
+  </figure>
+</main>
+
+<footer>Atlas Lead Group LLC. Serving Ann Arbor and Saline, Michigan.</footer>
+</body>
+</html>
