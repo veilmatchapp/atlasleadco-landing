@@ -1,2 +1,4 @@
 node_modules/
 .playwright-mcp/
+tasks/SITE_SCOPE_*.md
+hero/prices.local.json
