@@ -123,6 +123,22 @@ h1{margin:0 0 clamp(14px,2.4vh,26px);font-weight:400;font-size:clamp(2.6rem,5.6v
   .bodytxt{font-size:12px;line-height:1.4}
   .fld span{width:4.8em}
   .map figcaption{text-align:center}
+  /* phones, last stage: the laptop window takes only the space above the headline, so the two can never overlap
+     (the window used to be as tall as its text and the headline was pinned to the bottom, so on some screens they collided) */
+  html.live .f4{display:flex;flex-direction:column;align-items:stretch;padding:76px 0 0}
+  html.live .f4 .laptop{flex:1 1 0;min-height:0;width:min(92vw,520px);margin:0 auto 14px;display:flex;flex-direction:column}
+  html.live .f4 .bezel{flex:1 1 auto;min-height:0;display:flex}
+  html.live .f4 .screen{flex:1 1 auto;min-height:0;overflow:hidden;width:100%}
+  html.live .f4 .copy{position:static;max-width:none;margin:0;padding:0 var(--gx) clamp(20px,4.5vh,40px)}
+  html.live .m2{display:none}
+}
+/* short phones: tighten the email so it still fits above the headline */
+@media (max-width:820px) and (max-height:740px){
+  .ui{font-size:11px}
+  .bodytxt{font-size:11px;line-height:1.35}
+  .ui-main{padding:.6em .8em .2em}
+  .ui-bar{margin-bottom:.5em}
+  html.live .f4 .copy .aside{font-size:.9rem}
 }
 
 html.js:not(.live):not(.static) :is(.f3,.f4){visibility:hidden}

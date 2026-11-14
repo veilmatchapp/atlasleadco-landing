@@ -68,3 +68,10 @@ html.lenis,html.lenis body{height:auto}
 .end{position:relative;padding:28px var(--gx) 36px;font-size:15px;color:var(--text3);background:var(--ground)}
 .end .credit{display:inline-block;margin-top:6px;font-size:13px;color:var(--text3)}
 
+
+/* narrow phones (360 to 400 px): the logo plus four nav items must fit without running off the edge */
+@media (max-width:400px){
+  .top,.top.page{padding-inline:16px;gap:8px}
+  .brand img{width:88px}
+  .top nav{gap:9px;font-size:13px}
+}
