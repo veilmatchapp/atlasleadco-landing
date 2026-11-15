@@ -9,6 +9,7 @@ html.rv [data-r="mask"]:not(.in)>span{transform:translateY(108%)}
 html.rv [data-r="fade"]:not(.in){opacity:0}
 [data-r="wipe"]{clip-path:inset(-10px -10px -10px -10px);transition:clip-path .9s cubic-bezier(.6,0,.2,1) calc(var(--i,0) * 70ms)}
 html.rv [data-r="wipe"]:not(.in){clip-path:inset(0 100% 0 0)}
+canvas.engrave{aspect-ratio:1}
 .engrave{position:absolute;color:var(--secondary);opacity:.15;pointer-events:none;transition:opacity 2.4s ease,transform 3.6s cubic-bezier(.2,.7,.1,1)}
 html.rv .engrave:not(.in){opacity:0;transform:rotate(-8deg)}
 @media (prefers-reduced-motion:reduce){[data-r],[data-r]>span,.engrave,.row,.layer,.checks li,[data-step],.sw-row,.sw,.sw::after,.node{transition:none!important}}

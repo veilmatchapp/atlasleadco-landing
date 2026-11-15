@@ -7,6 +7,50 @@ const $$ = (s, r = document) => [...r.querySelectorAll(s)];
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 root.classList.add('rv');
 
+/* ---- the engraved globes: redrawn on a canvas so they turn slowly to the right, like the hero globe ---- */
+const D = Math.PI / 180, TILT = 18 * D, ROLL = 8 * D, SPEED = 0.075; // radians per second, same as the hero
+const lines = [];
+for (let lon = -180; lon < 180; lon += 10) { const l = []; for (let lat = -80; lat <= 80; lat += 2) l.push([lat * D, lon * D]); lines.push(l); }
+for (let lat = -80; lat <= 80; lat += 10) { const l = []; for (let lon = 0; lon <= 360; lon += 3) l.push([lat * D, lon * D]); lines.push(l); }
+$$('svg.engrave').forEach((svg) => {
+  const cv = document.createElement('canvas'), ctx = cv.getContext('2d');
+  cv.className = svg.getAttribute('class'); cv.setAttribute('aria-hidden', 'true'); cv.dataset.r = 'draw';
+  svg.replaceWith(cv);
+  let size = 0, dpr = 1, yaw = 0, last = 0, running = false;
+  const size_ = () => { dpr = Math.min(devicePixelRatio || 1, 2); size = Math.round(cv.clientWidth * dpr); cv.width = cv.height = size; };
+  const draw = () => {
+    const R = size * 0.4667, c = size / 2, col = getComputedStyle(cv).color;
+    ctx.clearRect(0, 0, size, size); ctx.lineWidth = dpr; ctx.strokeStyle = col;
+    ctx.globalAlpha = 0.5; ctx.beginPath(); ctx.arc(c, c, R, 0, 6.2832); ctx.stroke(); ctx.globalAlpha = 1;
+    const cT = Math.cos(TILT), sT = Math.sin(TILT), cR = Math.cos(ROLL), sR = Math.sin(ROLL);
+    ctx.beginPath();
+    for (const l of lines) {
+      let pen = false;
+      for (const [phi, lam0] of l) {
+        const lam = lam0 + yaw, cp = Math.cos(phi);
+        const x = cp * Math.sin(lam), y0 = Math.sin(phi), z0 = cp * Math.cos(lam);
+        const y = y0 * cT - z0 * sT, z = y0 * sT + z0 * cT;
+        if (z < 0) { pen = false; continue; }
+        const px = c + R * (x * cR - y * sR), py = c - R * (x * sR + y * cR);
+        if (pen) ctx.lineTo(px, py); else ctx.moveTo(px, py);
+        pen = true;
+      }
+    }
+    ctx.stroke();
+  };
+  const tick = (t) => {
+    if (!running) return;
+    yaw += (t - last) / 1000 * SPEED; last = t; draw(); requestAnimationFrame(tick);
+  };
+  size_(); yaw = 95 * D; draw();
+  addEventListener('resize', () => { size_(); draw(); });
+  if (reduce || !('IntersectionObserver' in window)) return;
+  new IntersectionObserver((e) => {
+    const on = e[0].isIntersecting;
+    if (on && !running) { running = true; last = performance.now(); requestAnimationFrame(tick); } else if (!on) running = false;
+  }).observe(cv);
+});
+
 /* ---- generic reveals: add .in once an element is on screen ---- */
 const els = $$('[data-r]');
 if (reduce || !('IntersectionObserver' in window)) els.forEach((e) => e.classList.add('in'));

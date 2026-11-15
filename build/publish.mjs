@@ -7,7 +7,7 @@ const pages = ['ai', 'security', 'websites', 'checkup', 'how-it-works', 'plans',
 // empty public/ rather than deleting the folder itself: on Windows a server running inside it would block the delete
 mkdirSync(root('public'), { recursive: true });
 for (const name of readdirSync(root('public'))) rmSync(root(`public/${name}`), { recursive: true, force: true });
-for (const f of ['index.html', 'base.css', 'pages.css', 'sections.css', 'hero.css', 'config.js', 'forms.js', 'atlas-logo.png']) cpSync(root(`site/${f}`), root(`public/${f}`));
+for (const f of ['index.html', 'base.css', 'pages.css', 'sections.css', 'hero.css', 'config.js', 'forms.js', 'atlas-logo.png', 'favicon.ico', 'favicon-32.png', 'apple-touch-icon.png', 'icon-192.png', 'icon-512.png', 'site.webmanifest']) cpSync(root(`site/${f}`), root(`public/${f}`));
 for (const d of ['fonts', 'dist', ...pages]) cpSync(root(`site/${d}`), root(`public/${d}`), { recursive: true });
 mkdirSync(root('public/assets'));
 for (const f of ['coast.bin', 'coast.json', 'still-globe.webp', 'still-michigan.webp']) cpSync(root(`site/assets/${f}`), root(`public/assets/${f}`));

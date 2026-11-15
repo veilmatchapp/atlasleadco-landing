@@ -151,3 +151,6 @@ Commit and push after each step and report the hash. Stop for owner review after
 - Rejected brief and prototypes: https://claude.ai/artifact/Qhg6kfVoujBMvyNK8U4kDk. These show what NOT to repeat.
 - Reference board: https://claude.ai/artifact/LeyhAkSYBD5w3W522FE1zp
 - Owner brief 2026-11-13: `tasks/SITE_SCOPE_2026-11-13.md` (local only)
+
+## Favicon
+`build/make-favicon.py` derives the favicon set (`favicon.ico`, PNGs, apple-touch-icon, manifest icons) from the figure in `atlas-logo.png` on a ground-colored tile, at the owner's request (2026-11-14). `atlas-logo.png` itself stays untouched.
